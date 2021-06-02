@@ -39,3 +39,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
+
+## Read more
+
+[Semantic](https://github.com/semantic-release/semantic-release/blob/master/docs/usage/getting-started.md#getting-started)

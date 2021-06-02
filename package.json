@@ -38,14 +38,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/TeamDotworld/react-native-ble-advertiser.git"
+    "url": "https://github.com/TeamDotworld/rn-ble-advertiser.git"
   },
   "author": "Naveen Sakthivel <naveen@dotworld.in> (https://dotworld.in)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TeamDotworld/react-native-ble-advertiser/issues"
+    "url": "https://github.com/TeamDotworld/rn-ble-advertiser/issues"
   },
-  "homepage": "https://github.com/TeamDotworld/react-native-ble-advertiser#readme",
+  "homepage": "https://github.com/TeamDotworld/rn-ble-advertiser#readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
