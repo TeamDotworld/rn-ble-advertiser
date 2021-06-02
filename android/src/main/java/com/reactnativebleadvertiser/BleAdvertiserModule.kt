@@ -37,8 +37,12 @@ class BleAdvertiserModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun startService() {
     Log.i(TAG, "Start Service")
-    if (AppPreferences.userId != null) {
-      Utils.startBluetoothMonitoringService(reactApplicationContext)
+    try {
+      if (AppPreferences.userId != null) {
+        Utils.startBluetoothMonitoringService(reactApplicationContext)
+      }
+    } catch (e: Exception) {
+      e.printStackTrace()
     }
   }
 

@@ -24,12 +24,23 @@ npm install @teamdotworld/rn-ble-advertiser@1.0.1
 
 ## Usage
 
+Add this to your AndroidManifest.xml inside application tag
+
+```xml
+    <application ...>
+        ...
+    <service android:name="dev.dotworld.ble.services.BluetoothMonitoringService" />
+        ...
+    </application>
+```
+
 ```js
 import BleAdvertiser from '@teamdotworld/rn-ble-advertiser';
 
 // ...
 
-const result = await BleAdvertiser.setUserId('test');
+BleAdvertiser.setUserId('test');
+BleAdvertiser.startService();
 ```
 
 ## Contributing

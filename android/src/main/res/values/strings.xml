@@ -2,13 +2,11 @@
 
   <string name="ble_not_supported">Bluetooth not supported</string>
 
-  <string name="service_ok_title">BLE Trace is scanning to keep you safe! :)</string>
+  <string name="service_ok_title">BLE Trace is your gateway:)</string>
   <string name="service_ok_body">Restart phone if this notification disappears</string>
 
   <string name="service_not_ok_title">Oh no! :(</string>
-  <string name="service_not_ok_body">OpenTrace is not scanning.</string>
+  <string name="service_not_ok_body">BLE Trace is not scanning.</string>
   <string name="service_not_ok_action">Check app now</string>
-
-  <string name="public_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAooDxEsQ0VGa80Yp5fwczAIEq7fuQF6cQqaD+czcBRK0UhH0FXjxTFKfA9OlFMHF/GH4n1vvne/rPFEl2sVhxJucbV9g7dwv70WyZNXODqIdX4dqyn3Y7Uz6h3gX9lUYtjW5KFBtEysJl3Vtq4gQyGfKZbjxnreI/BU+Xbjg9QqhQ0T93UFNluZKPf0o9ki+BFSD3gc1NnyUhfa7ncCFaSRkd8/fyNeR/zaKUN/W4+MMiZ9huCh2+ZIrQ2fiIZIX8gqWjwZ2tH39Cquy3pzkOtFOavVOw1di9fdqicq5L4YUdoakNItuAirOgcHOfa8s2L6piOxNiPqnZ9++nqn9WQQIDAQAB</string>
 
 </resources>
