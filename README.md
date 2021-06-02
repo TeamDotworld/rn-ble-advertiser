@@ -35,13 +35,21 @@ Add this to your AndroidManifest.xml inside application tag
 ```
 
 ```js
+import { Platform } from 'react-native';
 import BleAdvertiser from '@teamdotworld/rn-ble-advertiser';
 
-// ...
-
-BleAdvertiser.setUserId('test');
-BleAdvertiser.startService();
+// This module is currenly available only for android. Check if the platform is android and then use
+if (Platform.OS === 'android') {
+  BleAdvertiser.setUserId('test');
+  BleAdvertiser.startService();
+}
 ```
+
+## Issues
+
+Known issues
+
+- Module currenly supports minimum android sdk of 22. Change your **_minSdkVersion_** in android/build.gradle to 22
 
 ## Contributing
 
@@ -50,7 +58,3 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
-
-## Read more
-
-[Semantic](https://github.com/semantic-release/semantic-release/blob/master/docs/usage/getting-started.md#getting-started)
