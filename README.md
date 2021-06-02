@@ -1,17 +1,31 @@
-# react-native-ble-advertiser
+# React Native BLE Advertiser
 
 Advertise given message using BLE
 
 ## Installation
 
+For installing this package from GitHub Package registry read the steps [here](https://docs.github.com/en/enterprise-server@2.22/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package)
+
+Authenticate to GitHub package registry using below command. Use Token
+
 ```sh
-npm install react-native-ble-advertiser
+$ npm login --scope=@teamdotworld --registry=https://npm.pkg.github.com
+
+> Username: USERNAME
+> Password: TOKEN
+> Email: PUBLIC-EMAIL-ADDRESS
+```
+
+Now install the package
+
+```sh
+npm install @teamdotworld/rn-ble-advertiser@1.0.1
 ```
 
 ## Usage
 
 ```js
-import BleAdvertiser from 'react-native-ble-advertiser';
+import BleAdvertiser from '@teamdotworld/rn-ble-advertiser';
 
 // ...
 

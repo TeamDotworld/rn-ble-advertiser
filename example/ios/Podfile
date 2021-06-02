@@ -8,7 +8,7 @@ target 'BleAdvertiserExample' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'react-native-ble-advertiser', :path => '../..'
+  pod '@teamdotworld/rn-ble-advertiser', :path => '../..'
 
   # Enables Flipper.
   #

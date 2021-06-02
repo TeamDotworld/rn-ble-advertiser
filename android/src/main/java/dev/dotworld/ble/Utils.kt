@@ -101,7 +101,7 @@ object Utils {
         NotificationCompat.Builder(context.applicationContext, "notify_001")
           .setSmallIcon(R.drawable.ic_notification_service)
           .setContentTitle("Authentication Notification")
-          .setContentText("You are being authenticated by BLE Tracker at ${BuildConfig.LOCATION}")
+          .setContentText("You are being authenticated by BLE Tracker")
           .setPriority(NotificationCompat.PRIORITY_HIGH)
 
       val mNotificationManager =
