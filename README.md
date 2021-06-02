@@ -19,7 +19,7 @@ $ npm login --scope=@teamdotworld --registry=https://npm.pkg.github.com
 Now install the package
 
 ```sh
-npm install @teamdotworld/rn-ble-advertiser@1.0.1
+npm install @teamdotworld/rn-ble-advertiser@1.0.3
 ```
 
 ## Usage
