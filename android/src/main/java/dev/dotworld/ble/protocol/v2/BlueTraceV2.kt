@@ -1,14 +1,17 @@
 package dev.dotworld.ble.protocol.v2
 
-import android.content.res.Resources
 import android.os.Build
 import android.util.Log
-import com.reactnativebleadvertiser.R
+import com.google.gson.Gson
+import com.reactnativebleadvertiser.BuildConfig
+import dev.dotworld.ble.AppPreferences
+import dev.dotworld.ble.Utils
 import dev.dotworld.ble.protocol.BlueTraceProtocol
 import dev.dotworld.ble.protocol.PeripheralInterface
 import dev.dotworld.ble.streetpass.CentralDevice
 import dev.dotworld.ble.streetpass.ConnectionRecord
 import dev.dotworld.ble.streetpass.PeripheralDevice
+import java.util.*
 
 
 class BlueTraceV2 : BlueTraceProtocol(
@@ -23,10 +26,12 @@ class V2Peripheral : PeripheralInterface {
   }
 
   override fun prepareReadRequestData(protocolVersion: Int): ByteArray {
-    val publicKey = Resources.getSystem().getString(R.string.public_key)
     return V2ReadRequestPayload(
       v = protocolVersion,
-      id = "test",//Utils.encryptByPublicKey("test-${Date()}", publicKey),
+      id = Utils.encryptByPublicKey(
+        Gson().toJson(UserData(AppPreferences.userId ?: "", Date())),
+        BuildConfig.PUBLIC_KEY
+      ),
       o = "DW",
       peripheral = PeripheralDevice(Build.MODEL, "SELF")
     ).getPayload()

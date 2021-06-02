@@ -58,16 +58,27 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
       }
 
       device?.let {
+
         Log.i(TAG, "onCharacteristicReadRequest from ${device.address}")
+
         if (BlueTrace.supportsCharUUID(characteristic?.uuid)) {
           characteristic?.uuid?.let { charUUID ->
             val bluetraceImplementation = BlueTrace.getImplementation(charUUID)
-            val base = readPayloadMap.getOrPut(device.address) {
+            val base = readPayloadMap.getOrPut(device.address, {
               bluetraceImplementation.peripheral.prepareReadRequestData(
                 bluetraceImplementation.versionInt
               )
-            }
+            })
             val value = base.copyOfRange(offset, base.size)
+            Log.i(
+              TAG,
+              "onCharacteristicReadRequest from ${device.address} - $requestId- $offset - ${
+                String(
+                  value,
+                  Charsets.UTF_8
+                )
+              }"
+            )
             bluetoothGattServer?.sendResponse(
               device,
               requestId,
@@ -76,6 +87,7 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
               value
             )
           }
+
         } else {
           Log.i(TAG, "unsupported characteristic UUID from ${device.address}")
           bluetoothGattServer?.sendResponse(
@@ -84,6 +96,7 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
           )
         }
       }
+
     }
 
     override fun onCharacteristicWriteRequest(
@@ -103,7 +116,7 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
         responseNeeded,
         offset,
         value
-      )
+      );
       Log.i(TAG, "onCharacteristicWriteRequest: ")
       value?.let {
         Log.i(TAG, "onCharacteristicWriteRequest: ${String(it)}")
@@ -122,7 +135,9 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
   }
 
   fun startServer(): Boolean {
+
     bluetoothGattServer = bluetoothManager.openGattServer(context, gattServerCallback)
+
     bluetoothGattServer?.let {
       it.clearServices()
       return true

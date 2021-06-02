@@ -43,9 +43,6 @@ android {
     buildConfigField "int", "PUSH_NOTIFICATION_ID", PUSH_NOTIFICATION_ID
     buildConfigField "String", "PUSH_NOTIFICATION_CHANNEL_NAME", PUSH_NOTIFICATION_CHANNEL_NAME
 
-    buildConfigField "long", "SCAN_DURATION", SCAN_DURATION
-    buildConfigField "long", "MIN_SCAN_INTERVAL", MIN_SCAN_INTERVAL
-    buildConfigField "long", "MAX_SCAN_INTERVAL", MAX_SCAN_INTERVAL
     buildConfigField "long", "HEALTH_CHECK_INTERVAL", HEALTH_CHECK_INTERVAL
     buildConfigField "long", "MAX_QUEUE_TIME", MAX_QUEUE_TIME
     buildConfigField "long", "BM_CHECK_INTERVAL", BM_CHECK_INTERVAL
@@ -61,7 +58,7 @@ android {
 
     buildConfigField "String", "V2_CHARACTERISTIC_ID", V2_CHARACTERISTIC_ID
 
-    buildConfigField "String", "LOCATION", LOCATION
+    buildConfigField "String", "PUBLIC_KEY", PUBLIC_KEY
 
   }
 
