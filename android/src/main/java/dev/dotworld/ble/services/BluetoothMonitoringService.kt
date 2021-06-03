@@ -44,7 +44,6 @@ class BluetoothMonitoringService : Service(), CoroutineScope {
   override fun onCreate() {
     Log.i(TAG, "setup: Setting Bluetooth monitoring service")
     commandHandler = CommandHandler(WeakReference(this))
-    Log.i(TAG, "onCreate: Service UUID is $serviceUUID")
     serviceUUID = BuildConfig.SERVICE_ID
     Log.i(TAG, "onCreate: Service UUID is $serviceUUID")
     setupNotifications()
