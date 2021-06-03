@@ -1,6 +1,6 @@
 {
   "name": "@teamdotworld/rn-ble-advertiser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Advertise given message using BLE",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

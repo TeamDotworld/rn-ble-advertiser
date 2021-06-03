@@ -59,7 +59,6 @@ android {
     buildConfigField "String", "V2_CHARACTERISTIC_ID", V2_CHARACTERISTIC_ID
 
     buildConfigField "String", "PUBLIC_KEY", PUBLIC_KEY
-
   }
 
   buildTypes {
