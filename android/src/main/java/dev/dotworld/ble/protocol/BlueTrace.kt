@@ -17,11 +17,7 @@ object BlueTrace {
     2 to BlueTraceV2()
   )
 
-  fun supportsCharUUID(charUUID: UUID?): Boolean {
-    if (charUUID == null) {
-      return false
-    }
-
+  fun supportsCharUUID(charUUID: UUID): Boolean {
     characteristicToProtocolVersionMap[charUUID]?.let { version ->
       return implementations[version] != null
     }

@@ -3,6 +3,7 @@ package dev.dotworld.ble.bluetooth.gatt
 import android.bluetooth.*
 import android.content.Context
 import android.util.Log
+import dev.dotworld.ble.AppPreferences
 import dev.dotworld.ble.Utils
 import dev.dotworld.ble.protocol.BlueTrace
 import java.util.*
@@ -53,48 +54,51 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
       characteristic: BluetoothGattCharacteristic?
     ) {
 
-      if (device == null) {
-        Log.w(TAG, "No device")
-      }
+      try {
+        if (device == null) {
+          Log.w(TAG, "No device")
+        }
 
-      device?.let {
+        device?.let {
+          Log.i(TAG, "onCharacteristicReadRequest from ${device.address}")
 
-        Log.i(TAG, "onCharacteristicReadRequest from ${device.address}")
-
-        if (BlueTrace.supportsCharUUID(characteristic?.uuid)) {
-          characteristic?.uuid?.let { charUUID ->
-            val bluetraceImplementation = BlueTrace.getImplementation(charUUID)
-            val base = readPayloadMap.getOrPut(device.address, {
-              bluetraceImplementation.peripheral.prepareReadRequestData(
-                bluetraceImplementation.versionInt
-              )
-            })
-            val value = base.copyOfRange(offset, base.size)
-            Log.i(
-              TAG,
-              "onCharacteristicReadRequest from ${device.address} - $requestId- $offset - ${
-                String(
-                  value,
-                  Charsets.UTF_8
+          if (characteristic != null && characteristic.uuid != null && BlueTrace.supportsCharUUID(characteristic.uuid)) {
+            characteristic.uuid.let { charUUID ->
+              val bluetraceImplementation = BlueTrace.getImplementation(charUUID)
+              val base = readPayloadMap.getOrPut(device.address, {
+                bluetraceImplementation.peripheral.prepareReadRequestData(
+                  bluetraceImplementation.versionInt
                 )
-              }"
-            )
+              })
+              val value = base.copyOfRange(offset, base.size)
+              Log.i(
+                TAG,
+                "onCharacteristicReadRequest from ${device.address} - $requestId- $offset - ${
+                  String(
+                    value,
+                    Charsets.UTF_8
+                  )
+                }"
+              )
+              bluetoothGattServer?.sendResponse(
+                device,
+                requestId,
+                BluetoothGatt.GATT_SUCCESS,
+                0,
+                value
+              )
+            }
+
+          } else {
+            Log.i(TAG, "unsupported characteristic UUID from ${device.address}")
             bluetoothGattServer?.sendResponse(
-              device,
-              requestId,
-              BluetoothGatt.GATT_SUCCESS,
-              0,
-              value
+              device, requestId,
+              BluetoothGatt.GATT_FAILURE, 0, null
             )
           }
-
-        } else {
-          Log.i(TAG, "unsupported characteristic UUID from ${device.address}")
-          bluetoothGattServer?.sendResponse(
-            device, requestId,
-            BluetoothGatt.GATT_FAILURE, 0, null
-          )
         }
+      }catch (e:Exception) {
+        Log.e(TAG, "onCharacteristicReadRequest: ", e)
       }
 
     }
@@ -118,9 +122,15 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
         value
       );
       Log.i(TAG, "onCharacteristicWriteRequest: ")
-      value?.let {
-        Log.i(TAG, "onCharacteristicWriteRequest: ${String(it)}")
-        Utils.notifyUser(context)
+      try {
+        value?.let {
+          Log.i(TAG, "onCharacteristicWriteRequest: ${String(it)}")
+          if(String(it) == AppPreferences.userId) {
+            Utils.notifyUser(context)
+          }
+        }
+      }catch (e:Exception) {
+        Log.e(TAG, "onCharacteristicWriteRequest: ", e)
       }
     }
 

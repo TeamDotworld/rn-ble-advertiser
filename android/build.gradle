@@ -145,10 +145,10 @@ repositories {
   }
 
   if (!found) {
-    throw new GradleException(
-            "${project.name}: unable to locate React Native android sources. " +
-                    "Ensure you have you installed React Native as a dependency in your project and try again."
-    )
+//    throw new GradleException(
+//            "${project.name}: unable to locate React Native android sources. " +
+//                    "Ensure you have you installed React Native as a dependency in your project and try again."
+//    )
   }
 }
 

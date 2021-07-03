@@ -1,10 +1,16 @@
 import { NativeModules } from 'react-native';
 
+
 type BleAdvertiserType = {
-  setUserId(userId: string): void;
-  resetUserId(): void;
-  startService(): void;
+  init(companyId: number): void;
+  setData(data: string): void;
+  startBroadcast(): void;
+  stopBroadcast(): void;
 };
+
+
+
+
 
 const { BleAdvertiser } = NativeModules;
 

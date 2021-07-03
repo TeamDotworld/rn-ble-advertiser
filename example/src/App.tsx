@@ -7,8 +7,11 @@ export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    BleAdvertiser.setUserId('test');
-    BleAdvertiser.startService();
+    BleAdvertiser.init(1023)
+    BleAdvertiser.setData("1234")
+    setTimeout(() => {
+      BleAdvertiser.startBroadcast()
+    },4000)
   }, []);
 
   return (
