@@ -7,7 +7,11 @@ export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    ReactNativeBleAdvertiser.multiply(3, 7).then(setResult);
+    ReactNativeBleAdvertiser.init(1023)
+    ReactNativeBleAdvertiser.setData("1234")
+    setTimeout(() => {
+      ReactNativeBleAdvertiser.startBroadcast()
+    },4000)
   }, []);
 
   return (
