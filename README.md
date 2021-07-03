@@ -1,17 +1,17 @@
-# @teamdotworld/react-native-ble-advertiser
+# @teamdotworld/rn-ble-advertiser
 
 A React native BLE Advertiser
 
 ## Installation
 
 ```sh
-npm install @teamdotworld/react-native-ble-advertiser
+npm install @teamdotworld/rn-ble-advertiser
 ```
 
 ## Usage
 
 ```js
-import ReactNativeBleAdvertiser from "@teamdotworld/react-native-ble-advertiser";
+import ReactNativeBleAdvertiser from '@teamdotworld/rn-ble-advertiser';
 
 // ...
 

@@ -1,6 +1,6 @@
 {
-  "name": "@teamdotworld/react-native-ble-advertiser-example",
-  "description": "Example app for @teamdotworld/react-native-ble-advertiser",
+  "name": "@teamdotworld/rn-ble-advertiser-example",
+  "description": "Example app for @teamdotworld/rn-ble-advertiser",
   "version": "0.0.1",
   "private": true,
   "scripts": {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@teamdotworld/react-native-ble-advertiser": ["./src/index"]
+      "@teamdotworld/rn-ble-advertiser": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

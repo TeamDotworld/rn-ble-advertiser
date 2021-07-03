@@ -1,6 +1,6 @@
 {
-  "name": "@teamdotworld/react-native-ble-advertiser",
-  "version": "0.1.0",
+  "name": "@teamdotworld/rn-ble-advertiser",
+  "version": "2.0.1",
   "description": "A React native BLE Advertiser",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "teamdotworld-react-native-ble-advertiser.podspec",
+    "teamdotworld-rn-ble-advertiser.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
