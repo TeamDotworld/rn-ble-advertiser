@@ -1,0 +1,12 @@
+<resources>
+
+  <string name="ble_not_supported">Bluetooth not supported</string>
+
+  <string name="service_ok_title">BLE Trace is your gateway:)</string>
+  <string name="service_ok_body">Restart phone if this notification disappears</string>
+
+  <string name="service_not_ok_title">Oh no! :(</string>
+  <string name="service_not_ok_body">BLE Trace is not scanning.</string>
+  <string name="service_not_ok_action">Check app now</string>
+
+</resources>

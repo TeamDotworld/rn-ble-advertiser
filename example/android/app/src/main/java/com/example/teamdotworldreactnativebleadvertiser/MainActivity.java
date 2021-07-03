@@ -1,4 +1,4 @@
-package com.example.teamdotworldreactnativebleadvertiser;
+package dev.dotworld.ble.sample;
 
 import com.facebook.react.ReactActivity;
 

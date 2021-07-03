@@ -53,7 +53,7 @@ yarn test
 
 To edit the Objective-C files, open `example/ios/ReactNativeBleAdvertiserExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > @teamdotworld/react-native-ble-advertiser`.
 
-To edit the Kotlin files, open `example/android` in Android studio and find the source files at `teamdotworldreactnativebleadvertiser` under `Android`.
+To edit the Kotlin files, open `example/android` in Android studio and find the source files at `ble` under `Android`.
 
 ### Commit message convention
 

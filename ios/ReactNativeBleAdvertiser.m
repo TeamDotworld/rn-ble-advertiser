@@ -17,9 +17,9 @@ RCT_EXPORT_MODULE(ReactNativeBleAdvertiser)
   return @[@"level"];
 }
 
-RCT_EXPORT_METHOD(init: (nonnull NSNumber *)companyId){
-    RCTLogInfo(@"setCompanyId function called %@", companyId);
-    peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
+RCT_EXPORT_METHOD(init){
+   RCTLogInfo(@"init function called");
+   peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
 }
 
 RCT_EXPORT_METHOD(setData: (nonnull NSString *)data){

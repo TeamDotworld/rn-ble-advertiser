@@ -8,7 +8,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.1'
+    classpath 'com.android.tools.build:gradle:4.2.1'
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
@@ -16,6 +16,7 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
 
 def getExtOrDefault(name) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['ReactNativeBleAdvertiser_' + name]
@@ -29,15 +30,44 @@ android {
   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
   buildToolsVersion getExtOrDefault('buildToolsVersion')
   defaultConfig {
-    minSdkVersion 16
+    minSdkVersion 22
     targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
     versionCode 1
     versionName "1.0"
-    
+
+    buildConfigField "int", "SERVICE_FOREGROUND_NOTIFICATION_ID", SERVICE_FOREGROUND_NOTIFICATION_ID
+    buildConfigField "String", "SERVICE_FOREGROUND_CHANNEL_ID", SERVICE_FOREGROUND_CHANNEL_ID
+    buildConfigField "String", "SERVICE_FOREGROUND_CHANNEL_NAME", SERVICE_FOREGROUND_CHANNEL_NAME
+
+    buildConfigField "int", "PUSH_NOTIFICATION_ID", PUSH_NOTIFICATION_ID
+    buildConfigField "String", "PUSH_NOTIFICATION_CHANNEL_NAME", PUSH_NOTIFICATION_CHANNEL_NAME
+
+    buildConfigField "long", "HEALTH_CHECK_INTERVAL", HEALTH_CHECK_INTERVAL
+    buildConfigField "long", "MAX_QUEUE_TIME", MAX_QUEUE_TIME
+    buildConfigField "long", "BM_CHECK_INTERVAL", BM_CHECK_INTERVAL
+    buildConfigField "long", "ADVERTISING_DURATION", ADVERTISING_DURATION
+    buildConfigField "long", "ADVERTISING_INTERVAL", ADVERTISING_INTERVAL
+    buildConfigField "long", "CONNECTION_TIMEOUT", CONNECTION_TIMEOUT
+    buildConfigField "long", "BLACKLIST_DURATION", BLACKLIST_DURATION
+
+    buildConfigField "int", "MANUFACTURER_ID", MANUFACTURER_ID
+
+    buildConfigField "long", "PURGE_INTERVAL", PURGE_INTERVAL
+    buildConfigField "long", "PURGE_TTL", PURGE_TTL
+
+    buildConfigField "String", "V2_CHARACTERISTIC_ID", V2_CHARACTERISTIC_ID
+
+    buildConfigField "String", "PUBLIC_KEY", PUBLIC_KEY
   }
-  
+
   buildTypes {
+    debug {
+      buildConfigField "String", "SERVICE_ID", STAGING_SERVICE_UUID
+
+    }
     release {
+      buildConfigField "String", "SERVICE_ID", PROD_SERVICE_UUID
+
       minifyEnabled false
     }
   }
@@ -63,8 +93,8 @@ repositories {
     defaultDir = rootProject.ext.get('reactNativeAndroidRoot')
   } else {
     defaultDir = new File(
-            projectDir,
-            '/../../../node_modules/react-native/android'
+      projectDir,
+      '/../../../node_modules/react-native/android'
     )
   }
 
@@ -77,20 +107,23 @@ repositories {
     logger.info(":${project.name}:reactNativeAndroidRoot ${defaultDir.canonicalPath}")
     found = true
   } else {
+    logger.info("Root Project : ${rootProject.projectDir}")
     def parentDir = rootProject.projectDir
+    logger.info("parentDir : ${parentDir}")
 
     1.upto(5, {
       if (found) return true
       parentDir = parentDir.parentFile
+      logger.info("parentDir : ${parentDir}")
 
       def androidSourcesDir = new File(
-              parentDir,
-              'node_modules/react-native'
+        parentDir,
+        'node_modules/react-native'
       )
 
       def androidPrebuiltBinaryDir = new File(
-              parentDir,
-              'node_modules/react-native/android'
+        parentDir,
+        'node_modules/react-native/android'
       )
 
       if (androidPrebuiltBinaryDir.exists()) {
@@ -115,16 +148,18 @@ repositories {
 
   if (!found) {
     throw new GradleException(
-            "${project.name}: unable to locate React Native android sources. " +
-                    "Ensure you have you installed React Native as a dependency in your project and try again."
+      "${project.name}: unable to locate React Native android sources. " +
+        "Ensure you have you installed React Native as a dependency in your project and try again."
     )
   }
 }
-
 def kotlin_version = getExtOrDefault('kotlinVersion')
+
 
 dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+  implementation 'com.google.code.gson:gson:2.8.7'
 }
