@@ -10,8 +10,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.reactnativebleadvertiser.BuildConfig
+import dev.dotworld.ble.BuildConfig
 import dev.dotworld.ble.Utils
 import dev.dotworld.ble.bluetooth.BLEAdvertiser
 import dev.dotworld.ble.notifications.NotificationTemplates
@@ -27,7 +26,6 @@ import kotlin.coroutines.CoroutineContext
 class BluetoothMonitoringService : Service(), CoroutineScope {
 
   private var mNotificationManager: NotificationManager? = null
-  private val crashlytics = FirebaseCrashlytics.getInstance()
 
   private var streetPassServer: StreetPassServer? = null
   private var advertiser: BLEAdvertiser? = null
@@ -44,13 +42,11 @@ class BluetoothMonitoringService : Service(), CoroutineScope {
   }
 
   override fun onCreate() {
-    crashlytics.log("setup: Setting Bluetooth monitoring service")
     Log.i(TAG, "setup: Setting Bluetooth monitoring service")
     commandHandler = CommandHandler(WeakReference(this))
     serviceUUID = BuildConfig.SERVICE_ID
 
-    crashlytics.log("setup: Setting Bluetooth monitoring service")
-    Log.i(TAG, "onCreate: Service UUID is $serviceUUID")
+    Log.i(TAG, "onCrceate: Service UUID is $serviceUUID")
     setupNotifications()
   }
 

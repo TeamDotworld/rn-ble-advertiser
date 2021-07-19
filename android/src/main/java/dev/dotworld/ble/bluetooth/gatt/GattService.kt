@@ -3,7 +3,7 @@ package dev.dotworld.ble.bluetooth.gatt
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattService
 import android.content.Context
-import com.reactnativebleadvertiser.BuildConfig
+import dev.dotworld.ble.BuildConfig
 import java.util.*
 import kotlin.properties.Delegates
 
