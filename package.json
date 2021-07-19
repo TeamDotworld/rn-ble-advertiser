@@ -1,6 +1,6 @@
 {
   "name": "@teamdotworld/rn-ble-advertiser",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A React native BLE Advertiser",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
