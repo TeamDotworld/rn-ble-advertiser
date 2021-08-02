@@ -31,7 +31,7 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "semantic-release": "dotenv semantic-release --no-ci"
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "react-native",
