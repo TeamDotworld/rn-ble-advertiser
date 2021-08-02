@@ -44,7 +44,8 @@
   },
   "homepage": "https://github.com/TeamDotworld/rn-ble-advertiser.git#readme",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
@@ -95,7 +96,7 @@
       "tagName": "v${version}"
     },
     "npm": {
-      "publish": true
+      "publish": false
     },
     "github": {
       "release": true
