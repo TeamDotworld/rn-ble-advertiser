@@ -35,6 +35,10 @@ npm install @teamdotworld/rn-ble-advertiser@2.0.4
 Add this to your AndroidManifest.xml inside application tag
 
 ```xml
+	  <uses-permission android:name="android.permission.BLUETOOTH" />
+	  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application ...>
         ...
     	<service android:name="dev.dotworld.ble.services.BluetoothMonitoringService" />
