@@ -1,6 +1,6 @@
 {
   "name": "@teamdotworld/rn-ble-advertiser",
-  "version": "2.0.6",
+  "version": "0.0.0-development",
   "description": "A React native BLE Advertiser",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -27,10 +27,10 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
     "release": "release-it",
-    "release-local": "dotenv release-it --",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "react-native",
@@ -68,6 +68,7 @@
     "react-native": "0.63.4",
     "react-native-builder-bob": "^0.18.0",
     "release-it": "^14.2.2",
+    "semantic-release": "^17.4.4",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
