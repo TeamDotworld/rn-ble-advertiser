@@ -35,5 +35,22 @@ class NotificationTemplates {
 			return builder.build()
 		}
 
+		fun lackingThingsNotification(context: Context, channel: String): Notification {
+
+			val builder = NotificationCompat.Builder(context, channel)
+				.setContentTitle(context.getText(R.string.service_not_ok_title))
+				.setContentText(context.getText(R.string.service_not_ok_body))
+				.setOngoing(true)
+				.setPriority(Notification.PRIORITY_LOW)
+				.setSmallIcon(R.drawable.ic_notification_warning)
+				.setTicker(context.getText(R.string.service_not_ok_body))
+				.setWhen(System.currentTimeMillis())
+				.setSound(null)
+				.setVibrate(null)
+				.setColor(ContextCompat.getColor(context, R.color.notification_tint))
+
+			return builder.build()
+		}
+
 	}
 }
