@@ -93,16 +93,20 @@ class BluetoothMonitoringService : Service(), CoroutineScope {
 	}
 
 
-
 	private fun isBluetoothEnabled(): Boolean {
 		var btOn = false
-		val bluetoothAdapter: BluetoothAdapter? by lazy(LazyThreadSafetyMode.NONE) {
-			val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-			bluetoothManager.adapter
-		}
+		try {
+			val bluetoothAdapter: BluetoothAdapter? by lazy(LazyThreadSafetyMode.NONE) {
+				val bluetoothManager =
+					getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+				bluetoothManager.adapter
+			}
 
-		bluetoothAdapter?.let {
-			btOn = it.isEnabled
+			bluetoothAdapter?.let {
+				btOn = it.isEnabled
+			}
+		} catch (e: Exception) {
+			Log.e(TAG, "isBluetoothEnabled: Error enabling bluetooth", e)
 		}
 		return btOn
 	}
@@ -158,7 +162,18 @@ class BluetoothMonitoringService : Service(), CoroutineScope {
 	}
 
 	fun runService(cmd: Command?) {
+
+		if (!isBluetoothEnabled()) {
+			Log.i(
+				TAG,
+				"Bluetooth: ${isBluetoothEnabled()}"
+			)
+			notifyLackingThings()
+			return
+		}
+
 		notifyRunning()
+
 
 		when (cmd) {
 			Command.ACTION_START -> {
@@ -194,6 +209,13 @@ class BluetoothMonitoringService : Service(), CoroutineScope {
 	}
 
 	private fun performHealthCheck() {
+		if (!isBluetoothEnabled()) {
+			Log.i(TAG, "Bluetooth not enabled")
+			notifyLackingThings(true)
+			return
+		}
+
+
 		notifyRunning(true)
 		setupService()
 
