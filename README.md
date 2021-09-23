@@ -74,7 +74,7 @@ import { Platform } from 'react-native';
 import ReactNativeBleAdvertiser from '@teamdotworld/rn-ble-advertiser';
 
 // Use a switch to turn it on or off
-ReactNativeBleAdvertiser.init(); // Initalize the service
+ReactNativeBleAdvertiser.initialize(); // Initalize the service
 ReactNativeBleAdvertiser.setData('1234'); // set the data
 setTimeout(() => {
   // start the service after setting data. Restart if the data is changed after starting
