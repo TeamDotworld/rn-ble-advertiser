@@ -79,6 +79,12 @@ ReactNativeBleAdvertiser.setData('1234'); // set the data
 setTimeout(() => {
   // start the service after setting data. Restart if the data is changed after starting
   ReactNativeBleAdvertiser.startBroadcast();
+  
+  setTimeout(() => {
+	  // start the service after setting data. Restart if the data is changed after starting
+	  ReactNativeBleAdvertiser.stopBroadcast();
+	}, 4000);
+
 }, 4000);
 ```
 
