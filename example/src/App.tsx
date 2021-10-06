@@ -7,7 +7,7 @@ export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    ReactNativeBleAdvertiser.initialize();
+    ReactNativeBleAdvertiser.initializeBle();
     ReactNativeBleAdvertiser.setData('1234');
     setTimeout(() => {
       ReactNativeBleAdvertiser.startBroadcast();

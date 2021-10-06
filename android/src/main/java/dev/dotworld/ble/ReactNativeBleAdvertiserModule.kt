@@ -21,7 +21,7 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	}
 
 	@ReactMethod
-	fun initialize() {
+	fun initializeBle() {
 		Log.i(TAG, "initialize: initialize Called")
 	}
 
