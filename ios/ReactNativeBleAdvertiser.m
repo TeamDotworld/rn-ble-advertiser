@@ -17,8 +17,8 @@ RCT_EXPORT_MODULE(ReactNativeBleAdvertiser)
   return @[@"level"];
 }
 
-RCT_EXPORT_METHOD(init){
-   RCTLogInfo(@"init function called");
+RCT_EXPORT_METHOD(initialize){
+   RCTLogInfo(@"initialize function called");
    peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:nil];
 }
 

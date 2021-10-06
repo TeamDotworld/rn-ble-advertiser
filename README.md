@@ -23,7 +23,7 @@ $ npm login --scope=@teamdotworld --registry=https://npm.pkg.github.com
 Now install the package. See the releases and use latest version
 
 ```sh
-npm install @teamdotworld/rn-ble-advertiser@2.1.0
+npm install @teamdotworld/rn-ble-advertiser@2.3.0
 ```
 
 ---
@@ -74,7 +74,7 @@ import { Platform } from 'react-native';
 import ReactNativeBleAdvertiser from '@teamdotworld/rn-ble-advertiser';
 
 // Use a switch to turn it on or off
-ReactNativeBleAdvertiser.init(); // Initalize the service
+ReactNativeBleAdvertiser.initialize(); // Initalize the service
 ReactNativeBleAdvertiser.setData('1234'); // set the data
 setTimeout(() => {
   // start the service after setting data. Restart if the data is changed after starting

@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
 
 type ReactNativeBleAdvertiserType = {
-  init(): void;
+  initialize(): void;
   setData(data: string): void;
 
   startBroadcast(): void;
