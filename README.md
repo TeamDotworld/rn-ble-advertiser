@@ -83,7 +83,7 @@ setTimeout(() => {
   setTimeout(() => {
 	  // start the service after setting data. Restart if the data is changed after starting
 	  ReactNativeBleAdvertiser.stopBroadcast();
-	}, 4000);
+  }, 4000);
 
 }, 4000);
 ```
