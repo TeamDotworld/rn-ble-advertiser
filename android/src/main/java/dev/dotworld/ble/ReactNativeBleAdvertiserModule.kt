@@ -47,5 +47,10 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	@ReactMethod
 	fun stopBroadcast() {
 		Log.i(TAG, "stopBroadcast")
+		try {
+			Utils.stopBluetoothMonitoringService(reactApplicationContext)
+		} catch (e: Exception) {
+			e.printStackTrace()
+		}
 	}
 }

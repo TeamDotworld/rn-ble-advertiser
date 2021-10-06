@@ -19,7 +19,7 @@ class GattService constructor(val context: Context, serviceUUIDString: String) {
     )
 
     val characteristicV2 = BluetoothGattCharacteristic(
-      UUID.fromString(BuildConfig.V2_CHARACTERISTIC_ID),
+      UUID.fromString(BuildConfig.V1_CHARACTERISTIC_ID),
       BluetoothGattCharacteristic.PROPERTY_READ or BluetoothGattCharacteristic.PROPERTY_WRITE,
       BluetoothGattCharacteristic.PERMISSION_READ or BluetoothGattCharacteristic.PERMISSION_WRITE
     )

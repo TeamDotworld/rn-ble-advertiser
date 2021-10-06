@@ -38,6 +38,12 @@ object Utils {
 		Log.i(TAG, "startBluetoothMonitoringService: New service start request sent")
 	}
 
+	fun stopBluetoothMonitoringService(context: Context) {
+		val intent = Intent(context, BluetoothMonitoringService::class.java)
+		context.stopService(intent)
+		Log.i(TAG, "stopBluetoothMonitoringService: Stopping ble service")
+	}
+
 
 	fun isBluetoothAvailable(): Boolean {
 		val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()

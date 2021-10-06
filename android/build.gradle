@@ -48,16 +48,14 @@ android {
     buildConfigField "long", "ADVERTISING_DURATION", ADVERTISING_DURATION
     buildConfigField "long", "ADVERTISING_INTERVAL", ADVERTISING_INTERVAL
     buildConfigField "long", "CONNECTION_TIMEOUT", CONNECTION_TIMEOUT
-    buildConfigField "long", "BLACKLIST_DURATION", BLACKLIST_DURATION
 
     buildConfigField "int", "MANUFACTURER_ID", MANUFACTURER_ID
 
     buildConfigField "long", "PURGE_INTERVAL", PURGE_INTERVAL
     buildConfigField "long", "PURGE_TTL", PURGE_TTL
 
-    buildConfigField "String", "V2_CHARACTERISTIC_ID", V2_CHARACTERISTIC_ID
+    buildConfigField "String", "V1_CHARACTERISTIC_ID", V1_CHARACTERISTIC_ID
 
-    buildConfigField "String", "PUBLIC_KEY", PUBLIC_KEY
   }
 
   buildTypes {
