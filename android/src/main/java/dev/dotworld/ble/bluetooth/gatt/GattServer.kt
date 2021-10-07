@@ -3,6 +3,7 @@ package dev.dotworld.ble.bluetooth.gatt
 import android.bluetooth.*
 import android.content.Context
 import android.util.Log
+import dev.dotworld.ble.AppPreferences
 import dev.dotworld.ble.BuildConfig
 import dev.dotworld.ble.Utils
 import java.util.*
@@ -63,7 +64,7 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
 						Log.i(TAG, "onCharacteristicReadRequest: Sending data to the scanner")
 						characteristic.uuid?.let {
 							val base = readPayloadMap.getOrPut(device.address, {
-								"no-data".toByteArray()
+								if (AppPreferences.userId != null) AppPreferences.userId!!.toByteArray() else "no-data".toByteArray()
 							})
 							val value = base.copyOfRange(offset, base.size)
 							Log.i(

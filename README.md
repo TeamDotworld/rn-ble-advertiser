@@ -23,7 +23,7 @@ $ npm login --scope=@teamdotworld --registry=https://npm.pkg.github.com
 Now install the package. See the releases and use latest version
 
 ```sh
-npm install @teamdotworld/rn-ble-advertiser@2.3.3
+npm install @teamdotworld/rn-ble-advertiser@2.3.4
 ```
 
 ---
