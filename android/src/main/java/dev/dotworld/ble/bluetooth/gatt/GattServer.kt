@@ -59,7 +59,7 @@ class GattServer constructor(val context: Context, serviceUUIDString: String) {
 
 			device?.let {
 				try {
-					if (characteristic != null && characteristic.uuid.toString() === BuildConfig.V1_CHARACTERISTIC_ID) {
+					if (characteristic != null && UUID.fromString(BuildConfig.V1_CHARACTERISTIC_ID) == characteristic.uuid) {
 						Log.i(TAG, "onCharacteristicReadRequest: Sending data to the scanner")
 						characteristic.uuid?.let {
 							val base = readPayloadMap.getOrPut(device.address, {
