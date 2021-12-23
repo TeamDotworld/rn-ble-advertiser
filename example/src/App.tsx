@@ -12,6 +12,7 @@ export default function App() {
     setTimeout(() => {
       ReactNativeBleAdvertiser.startBroadcast();
     }, 4000);
+    setResult(1);
   }, []);
 
   return (

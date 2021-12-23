@@ -28,7 +28,7 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	@ReactMethod
 	fun setData(data: String) {
 		AppPreferences.userId = data
-		Log.i(TAG, "setData")
+		Log.i(TAG, "setData ${AppPreferences.userId}")
 	}
 
 	@ReactMethod
@@ -41,7 +41,6 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 		} catch (e: Exception) {
 			e.printStackTrace()
 		}
-		Log.i(TAG, "startBroadcast")
 	}
 
 	@ReactMethod
