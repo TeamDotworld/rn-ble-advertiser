@@ -41,7 +41,7 @@ Add this to your AndroidManifest.xml inside application tag
 	  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application ...>
         ...
-    	<service android:name="dev.dotworld.ble.services.BluetoothMonitoringService" />
+    	<service android:name="dev.dotworld.ble.bluetooth.gatt.GattBackgroundService" />
         ...
     </application>
 ```
