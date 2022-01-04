@@ -8,7 +8,7 @@ export default function App() {
 
   React.useEffect(() => {
     ReactNativeBleAdvertiser.initializeBle();
-    ReactNativeBleAdvertiser.setData('1234');
+    ReactNativeBleAdvertiser.setData('testing data from ble app');
     setTimeout(() => {
       ReactNativeBleAdvertiser.startBroadcast();
     }, 4000);

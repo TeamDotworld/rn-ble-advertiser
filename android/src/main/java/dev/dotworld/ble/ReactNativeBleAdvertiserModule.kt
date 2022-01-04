@@ -28,16 +28,15 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	@ReactMethod
 	fun setData(data: String) {
 		AppPreferences.userId = data
-		Log.i(TAG, "setData ${AppPreferences.userId}")
+		Log.i(TAG, "setData $data in App prefs as '${AppPreferences.userId}'")
 	}
 
 	@ReactMethod
 	fun startBroadcast() {
 		Log.i(TAG, "Start Service")
 		try {
-			if (AppPreferences.userId != null) {
-				Utils.startBluetoothMonitoringService(reactApplicationContext)
-			}
+			Log.i(TAG, "data in App prefs is '${AppPreferences.userId}'")
+			Utils.startBluetoothMonitoringService(reactApplicationContext)
 		} catch (e: Exception) {
 			e.printStackTrace()
 		}
