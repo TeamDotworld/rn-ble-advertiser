@@ -1,5 +1,6 @@
 package dev.dotworld.ble
 
+import android.app.ActivityManager
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -21,9 +22,20 @@ object Utils {
 	fun startBluetoothMonitoringService(context: Context) {
 		val intent = Intent(context, GattBackgroundService::class.java)
 
-		Log.i("Utils", "startBluetoothMonitoringService: Starting new service")
-		context.startService(intent)
-		Log.i(TAG, "startBluetoothMonitoringService: New service start request sent")
+		val isRunning = context.isMyServiceRunning(GattBackgroundService::class.java)
+		if (isRunning) {
+			Log.d(TAG, "startBluetoothMonitoringService: Service already running")
+		} else {
+			Log.i("Utils", "startBluetoothMonitoringService: Starting new service")
+			context.startService(intent)
+			Log.i(TAG, "startBluetoothMonitoringService: New service start request sent")
+		}
+	}
+
+	private fun Context.isMyServiceRunning(serviceClass: Class<*>): Boolean {
+		val manager = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+		return manager.getRunningServices(Integer.MAX_VALUE)
+			.any { it.service.className == serviceClass.name }
 	}
 
 	fun stopBluetoothMonitoringService(context: Context) {
@@ -33,7 +45,6 @@ object Utils {
 	}
 
 
-
 	fun createNotification(context: Context): Notification {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			val serviceChannel = NotificationChannel(
@@ -41,7 +52,8 @@ object Utils {
 				CHANNEL_NAME,
 				NotificationManager.IMPORTANCE_HIGH
 			)
-			val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+			val manager =
+				context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 			manager.createNotificationChannel(serviceChannel)
 		}
 
