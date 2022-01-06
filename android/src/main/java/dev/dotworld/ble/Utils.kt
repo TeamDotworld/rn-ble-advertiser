@@ -47,7 +47,7 @@ object Utils {
 
 		return NotificationCompat.Builder(context, CHANNEL_ID)
 			.setContentTitle(CHANNEL_NAME)
-			.setContentText("Please restart this device if this service is not running")
+			.setContentText("Please restart the app if this service is not running")
 			.setSmallIcon(R.drawable.ic_baseline_bluetooth_24)
 			.build()
 	}

@@ -36,6 +36,7 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 		Log.i(TAG, "Start Service")
 		try {
 			Log.i(TAG, "data in App prefs is '${AppPreferences.userId}'")
+			AppPreferences.needStart = true
 			Utils.startBluetoothMonitoringService(reactApplicationContext)
 		} catch (e: Exception) {
 			e.printStackTrace()
@@ -46,6 +47,7 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	fun stopBroadcast() {
 		Log.i(TAG, "stopBroadcast")
 		try {
+			AppPreferences.needStart = false
 			Utils.stopBluetoothMonitoringService(reactApplicationContext)
 		} catch (e: Exception) {
 			e.printStackTrace()
