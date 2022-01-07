@@ -30,6 +30,6 @@ object AppPreferences {
 	var needStart: Boolean
 		get() = preferences.getBoolean(NEED_START.first, NEED_START.second)
 		set(value) = preferences.edit {
-			it.putBoolean(USER_ID.first, value)
+			it.putBoolean(NEED_START.first, value)
 		}
 }

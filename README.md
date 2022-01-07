@@ -23,7 +23,7 @@ $ npm login --scope=@teamdotworld --registry=https://npm.pkg.github.com
 Now install the package. See the releases and use latest version
 
 ```sh
-npm install @teamdotworld/rn-ble-advertiser@3.0.3
+npm install @teamdotworld/rn-ble-advertiser@3.0.4
 ```
 
 ---
@@ -42,6 +42,17 @@ Add this to your AndroidManifest.xml inside application tag
     <application ...>
         ...
     	<service android:name="dev.dotworld.ble.bluetooth.gatt.GattBackgroundService" />
+
+		<receiver
+			android:name="dev.dotworld.ble.receivers.RestartReceiver"
+			android:enabled="true"
+			android:exported="true"
+			android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.QUICKBOOT_POWERON" />
+			</intent-filter>
+		</receiver>
         ...
     </application>
 ```
