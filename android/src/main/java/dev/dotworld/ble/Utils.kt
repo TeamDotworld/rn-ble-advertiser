@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import dev.dotworld.ble.bluetooth.gatt.GattBackgroundService
 
 object Utils {
@@ -26,8 +27,8 @@ object Utils {
 		if (isRunning) {
 			Log.d(TAG, "startBluetoothMonitoringService: Service already running")
 		} else {
-			Log.i("Utils", "startBluetoothMonitoringService: Starting new service")
-			context.startService(intent)
+			Log.i(TAG, "startBluetoothMonitoringService: Starting new service")
+			ContextCompat.startForegroundService(context, intent)
 			Log.i(TAG, "startBluetoothMonitoringService: New service start request sent")
 		}
 	}

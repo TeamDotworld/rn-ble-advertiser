@@ -7,4 +7,16 @@
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+	<application>
+		<meta-data
+			android:name="io.sentry.dsn"
+			android:value="https://13617a5fd309475d8a994fe17b956547@o484490.ingest.sentry.io/6139813" />
+		<!-- Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+		   We recommend adjusting this value in production. -->
+		<meta-data
+			android:name="io.sentry.traces.sample-rate"
+			android:value="1.0" />
+	</application>
+
+
 </manifest>

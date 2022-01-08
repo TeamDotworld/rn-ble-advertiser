@@ -4,6 +4,9 @@ import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import io.sentry.Sentry
+import io.sentry.protocol.User
+
 
 class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	ReactContextBaseJavaModule(reactContext) {
@@ -22,12 +25,19 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 
 	@ReactMethod
 	fun initializeBle() {
+		Sentry.captureMessage("Initializing BLE")
 		Log.i(TAG, "initialize: initializeBle Called")
 	}
 
 	@ReactMethod
 	fun setData(data: String) {
 		AppPreferences.userId = data
+		try {
+			val user = User()
+			user.id = data
+			Sentry.setUser(user)
+			Sentry.captureMessage("Set Data")
+		} catch (e: Exception) { }
 		Log.i(TAG, "setData $data in App prefs as '${AppPreferences.userId}'")
 	}
 
@@ -35,7 +45,6 @@ class ReactNativeBleAdvertiserModule(reactContext: ReactApplicationContext) :
 	fun startBroadcast() {
 		Log.i(TAG, "Start Service")
 		try {
-			Log.i(TAG, "data in App prefs is '${AppPreferences.userId}'")
 			AppPreferences.needStart = true
 			Utils.startBluetoothMonitoringService(reactApplicationContext)
 		} catch (e: Exception) {

@@ -1,18 +1,18 @@
 buildscript {
-  // Buildscript is evaluated before everything else so we can't use getExtOrDefault
-  def kotlin_version = rootProject.ext.has('kotlinVersion') ? rootProject.ext.get('kotlinVersion') : project.properties['ReactNativeBleAdvertiser_kotlinVersion']
+	// Buildscript is evaluated before everything else so we can't use getExtOrDefault
+	def kotlin_version = rootProject.ext.has('kotlinVersion') ? rootProject.ext.get('kotlinVersion') : project.properties['ReactNativeBleAdvertiser_kotlinVersion']
 
-  repositories {
-    google()
-    jcenter()
-  }
+	repositories {
+		google()
+		jcenter()
+	}
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:4.2.1'
-    // noinspection DifferentKotlinGradleVersion
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-      classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
-  }
+	dependencies {
+		classpath 'com.android.tools.build:gradle:4.2.1'
+		// noinspection DifferentKotlinGradleVersion
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
+	}
 }
 
 apply plugin: 'com.android.library'
@@ -20,145 +20,147 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
 def getExtOrDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['ReactNativeBleAdvertiser_' + name]
+	return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['ReactNativeBleAdvertiser_' + name]
 }
 
 def getExtOrIntegerDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['ReactNativeBleAdvertiser_' + name]).toInteger()
+	return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['ReactNativeBleAdvertiser_' + name]).toInteger()
 }
 
 android {
-  compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
-  buildToolsVersion getExtOrDefault('buildToolsVersion')
-  defaultConfig {
-    minSdkVersion 22
-    targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
-    versionCode 1
-    versionName "1.0"
+	compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
+	buildToolsVersion getExtOrDefault('buildToolsVersion')
+	defaultConfig {
+		minSdkVersion 22
+		targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
+		versionCode 1
+		versionName "1.0"
 
-    buildConfigField "int", "SERVICE_FOREGROUND_NOTIFICATION_ID", SERVICE_FOREGROUND_NOTIFICATION_ID
-    buildConfigField "String", "SERVICE_FOREGROUND_CHANNEL_ID", SERVICE_FOREGROUND_CHANNEL_ID
-    buildConfigField "String", "SERVICE_FOREGROUND_CHANNEL_NAME", SERVICE_FOREGROUND_CHANNEL_NAME
+		buildConfigField "int", "SERVICE_FOREGROUND_NOTIFICATION_ID", SERVICE_FOREGROUND_NOTIFICATION_ID
+		buildConfigField "String", "SERVICE_FOREGROUND_CHANNEL_ID", SERVICE_FOREGROUND_CHANNEL_ID
+		buildConfigField "String", "SERVICE_FOREGROUND_CHANNEL_NAME", SERVICE_FOREGROUND_CHANNEL_NAME
 
-    buildConfigField "int", "PUSH_NOTIFICATION_ID", PUSH_NOTIFICATION_ID
-    buildConfigField "String", "PUSH_NOTIFICATION_CHANNEL_NAME", PUSH_NOTIFICATION_CHANNEL_NAME
+		buildConfigField "int", "PUSH_NOTIFICATION_ID", PUSH_NOTIFICATION_ID
+		buildConfigField "String", "PUSH_NOTIFICATION_CHANNEL_NAME", PUSH_NOTIFICATION_CHANNEL_NAME
 
-    buildConfigField "long", "HEALTH_CHECK_INTERVAL", HEALTH_CHECK_INTERVAL
-    buildConfigField "long", "MAX_QUEUE_TIME", MAX_QUEUE_TIME
-    buildConfigField "long", "BM_CHECK_INTERVAL", BM_CHECK_INTERVAL
-    buildConfigField "long", "ADVERTISING_DURATION", ADVERTISING_DURATION
-    buildConfigField "long", "ADVERTISING_INTERVAL", ADVERTISING_INTERVAL
-    buildConfigField "long", "CONNECTION_TIMEOUT", CONNECTION_TIMEOUT
+		buildConfigField "long", "HEALTH_CHECK_INTERVAL", HEALTH_CHECK_INTERVAL
+		buildConfigField "long", "MAX_QUEUE_TIME", MAX_QUEUE_TIME
+		buildConfigField "long", "BM_CHECK_INTERVAL", BM_CHECK_INTERVAL
+		buildConfigField "long", "ADVERTISING_DURATION", ADVERTISING_DURATION
+		buildConfigField "long", "ADVERTISING_INTERVAL", ADVERTISING_INTERVAL
+		buildConfigField "long", "CONNECTION_TIMEOUT", CONNECTION_TIMEOUT
 
-    buildConfigField "int", "MANUFACTURER_ID", MANUFACTURER_ID
+		buildConfigField "int", "MANUFACTURER_ID", MANUFACTURER_ID
 
-    buildConfigField "long", "PURGE_INTERVAL", PURGE_INTERVAL
-    buildConfigField "long", "PURGE_TTL", PURGE_TTL
+		buildConfigField "long", "PURGE_INTERVAL", PURGE_INTERVAL
+		buildConfigField "long", "PURGE_TTL", PURGE_TTL
 
-    buildConfigField "String", "V1_CHARACTERISTIC_ID", V1_CHARACTERISTIC_ID
+		buildConfigField "String", "V1_CHARACTERISTIC_ID", V1_CHARACTERISTIC_ID
 
-  }
+	}
 
-  buildTypes {
-    debug {
-      buildConfigField "String", "SERVICE_ID", STAGING_SERVICE_UUID
+	buildTypes {
+		debug {
+			buildConfigField "String", "SERVICE_ID", STAGING_SERVICE_UUID
 
-    }
-    release {
-      buildConfigField "String", "SERVICE_ID", PROD_SERVICE_UUID
+		}
+		release {
+			buildConfigField "String", "SERVICE_ID", PROD_SERVICE_UUID
 
-      minifyEnabled false
-    }
-  }
-  lintOptions {
-    disable 'GradleCompatible'
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+			minifyEnabled false
+		}
+	}
+	lintOptions {
+		disable 'GradleCompatible'
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
 }
 
 repositories {
-  mavenCentral()
-  jcenter()
-  google()
+	mavenCentral()
+	jcenter()
+	google()
 
-  def found = false
-  def defaultDir = null
-  def androidSourcesName = 'React Native sources'
+	def found = false
+	def defaultDir = null
+	def androidSourcesName = 'React Native sources'
 
-  if (rootProject.ext.has('reactNativeAndroidRoot')) {
-    defaultDir = rootProject.ext.get('reactNativeAndroidRoot')
-  } else {
-    defaultDir = new File(
-      projectDir,
-      '/../../../node_modules/react-native/android'
-    )
-  }
+	if (rootProject.ext.has('reactNativeAndroidRoot')) {
+		defaultDir = rootProject.ext.get('reactNativeAndroidRoot')
+	} else {
+		defaultDir = new File(
+			projectDir,
+			'/../../../node_modules/react-native/android'
+		)
+	}
 
-  if (defaultDir.exists()) {
-    maven {
-      url defaultDir.toString()
-      name androidSourcesName
-    }
+	if (defaultDir.exists()) {
+		maven {
+			url defaultDir.toString()
+			name androidSourcesName
+		}
 
-    logger.info(":${project.name}:reactNativeAndroidRoot ${defaultDir.canonicalPath}")
-    found = true
-  } else {
-    logger.info("Root Project : ${rootProject.projectDir}")
-    def parentDir = rootProject.projectDir
-    logger.info("parentDir : ${parentDir}")
+		logger.info(":${project.name}:reactNativeAndroidRoot ${defaultDir.canonicalPath}")
+		found = true
+	} else {
+		logger.info("Root Project : ${rootProject.projectDir}")
+		def parentDir = rootProject.projectDir
+		logger.info("parentDir : ${parentDir}")
 
-    1.upto(5, {
-      if (found) return true
-      parentDir = parentDir.parentFile
-      logger.info("parentDir : ${parentDir}")
+		1.upto(5, {
+			if (found) return true
+			parentDir = parentDir.parentFile
+			logger.info("parentDir : ${parentDir}")
 
-      def androidSourcesDir = new File(
-        parentDir,
-        'node_modules/react-native'
-      )
+			def androidSourcesDir = new File(
+				parentDir,
+				'node_modules/react-native'
+			)
 
-      def androidPrebuiltBinaryDir = new File(
-        parentDir,
-        'node_modules/react-native/android'
-      )
+			def androidPrebuiltBinaryDir = new File(
+				parentDir,
+				'node_modules/react-native/android'
+			)
 
-      if (androidPrebuiltBinaryDir.exists()) {
-        maven {
-          url androidPrebuiltBinaryDir.toString()
-          name androidSourcesName
-        }
+			if (androidPrebuiltBinaryDir.exists()) {
+				maven {
+					url androidPrebuiltBinaryDir.toString()
+					name androidSourcesName
+				}
 
-        logger.info(":${project.name}:reactNativeAndroidRoot ${androidPrebuiltBinaryDir.canonicalPath}")
-        found = true
-      } else if (androidSourcesDir.exists()) {
-        maven {
-          url androidSourcesDir.toString()
-          name androidSourcesName
-        }
+				logger.info(":${project.name}:reactNativeAndroidRoot ${androidPrebuiltBinaryDir.canonicalPath}")
+				found = true
+			} else if (androidSourcesDir.exists()) {
+				maven {
+					url androidSourcesDir.toString()
+					name androidSourcesName
+				}
 
-        logger.info(":${project.name}:reactNativeAndroidRoot ${androidSourcesDir.canonicalPath}")
-        found = true
-      }
-    })
-  }
+				logger.info(":${project.name}:reactNativeAndroidRoot ${androidSourcesDir.canonicalPath}")
+				found = true
+			}
+		})
+	}
 
-  if (!found) {
-    throw new GradleException(
-      "${project.name}: unable to locate React Native android sources. " +
-        "Ensure you have you installed React Native as a dependency in your project and try again."
-    )
-  }
+	if (!found) {
+		throw new GradleException(
+			"${project.name}: unable to locate React Native android sources. " +
+				"Ensure you have you installed React Native as a dependency in your project and try again."
+		)
+	}
 }
 def kotlin_version = getExtOrDefault('kotlinVersion')
 
 
 dependencies {
-  // noinspection GradleDynamicVersion
-  api 'com.facebook.react:react-native:+'
+	// noinspection GradleDynamicVersion
+	api 'com.facebook.react:react-native:+'
 
-  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
-  implementation 'com.google.code.gson:gson:2.8.7'
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+	implementation 'com.google.code.gson:gson:2.8.7'
+	implementation 'io.sentry:sentry-android:5.5.2'
+
 }

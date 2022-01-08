@@ -4,8 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import dev.dotworld.ble.AppPreferences
 import dev.dotworld.ble.Utils
+import io.sentry.Sentry
 
 class RestartReceiver : BroadcastReceiver() {
 
@@ -15,11 +15,12 @@ class RestartReceiver : BroadcastReceiver() {
 
 	override fun onReceive(context: Context, intent: Intent) {
 		try {
-			if (intent.action == Intent.ACTION_BOOT_COMPLETED && AppPreferences.needStart) {
-				Log.d(TAG, "onReceive: Starting ble service")
+			if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
+				Log.d(TAG, "onReceive: Starting BLE monitoring service")
 				Utils.startBluetoothMonitoringService(context)
 			}
 		} catch (e: Exception) {
+			Sentry.captureException(e)
 			e.printStackTrace()
 		}
 	}

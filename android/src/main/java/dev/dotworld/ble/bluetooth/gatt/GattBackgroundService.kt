@@ -17,6 +17,7 @@ import android.util.Log
 import dev.dotworld.ble.AppPreferences
 import dev.dotworld.ble.BuildConfig
 import dev.dotworld.ble.Utils
+import io.sentry.Sentry
 import java.util.*
 
 class GattBackgroundService : Service() {
@@ -37,23 +38,28 @@ class GattBackgroundService : Service() {
 		val bluetoothAdapter = bluetoothManager.adapter
 		// We can't continue without proper Bluetooth support
 		try {
-			if (!checkBluetoothSupport(bluetoothAdapter)) {
-				Log.w(TAG, "onCreate: Bluetooth adapter not supported")
-				stopSelf()
-			}
+			if (bluetoothAdapter != null) {
+				if (!checkBluetoothSupport(bluetoothAdapter)) {
+					Log.w(TAG, "onCreate: Bluetooth adapter not supported")
+					stopSelf()
+				}
 
-			// Register for system Bluetooth events
-			val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-			registerReceiver(bluetoothReceiver, filter)
-			if (!bluetoothAdapter.isEnabled) {
-				Log.d(TAG, "Bluetooth is currently disabled...enabling")
-				bluetoothAdapter.enable()
+				// Register for system Bluetooth events
+				val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+				registerReceiver(bluetoothReceiver, filter)
+				if (!bluetoothAdapter.isEnabled) {
+					Log.d(TAG, "Bluetooth is currently disabled...enabling")
+					bluetoothAdapter.enable()
+				} else {
+					Log.d(TAG, "Bluetooth enabled...starting services")
+					startAdvertising()
+					startServer()
+				}
 			} else {
-				Log.d(TAG, "Bluetooth enabled...starting services")
-				startAdvertising()
-				startServer()
+				Log.d(TAG, "onCreate: No Bluetooth adapter detected")
 			}
 		} catch (e: Exception) {
+			Sentry.captureException(e)
 			e.printStackTrace()
 		}
 	}
@@ -137,6 +143,7 @@ class GattBackgroundService : Service() {
 					}
 				}
 			} catch (e: Exception) {
+				Sentry.captureException(e)
 				e.printStackTrace()
 			}
 		}
@@ -244,13 +251,11 @@ class GattBackgroundService : Service() {
 		super.onDestroy()
 
 		val bluetoothAdapter = bluetoothManager.adapter
-		if (bluetoothAdapter.isEnabled) {
+		if (bluetoothAdapter != null && bluetoothAdapter.isEnabled) {
 			stopServer()
 			stopAdvertising()
 		}
-
 		unregisterReceiver(bluetoothReceiver)
-
 	}
 
 	companion object {
